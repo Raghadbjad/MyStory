@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SwiftData
 struct Charcter: View {
     var body: some View {
         NavigationStack {
@@ -60,10 +60,6 @@ struct Charcter: View {
                                         RoundedRectangle(cornerRadius: 15)
                                         .stroke(Color.black, lineWidth: 1)  )
                                     VStack{
-                                        
-                                        
-                                        
-                                        
                                         Image("GirlCharcter")
                                             .resizable()
                                             .scaledToFit()
@@ -75,10 +71,7 @@ struct Charcter: View {
                                             .multilineTextAlignment(.center)
                                             .fontWeight(.bold)
                                             .foregroundColor(.black)
-                                            .padding(.top, 5)
-                                    }
-                                    
-                                }
+                                            .padding(.top, 5) }}
                                 
                             }
                         }

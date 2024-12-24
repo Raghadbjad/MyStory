@@ -10,7 +10,6 @@ import SwiftData
 
 @Model
 final class Story {
-    @Attribute(.unique) var id: UUID
     var title: String
     var background: String
     var character: String
@@ -18,16 +17,7 @@ final class Story {
     var finalVideo: URL?
     var date: Date
 
-    init(
-        id: UUID = UUID(),
-        title: String,
-        background: String,
-        character: String,
-        audioRecording: URL? = nil,
-        finalVideo: URL? = nil,
-        date: Date = Date()
-    ) {
-        self.id = id
+    init(title: String = "", background: String = "", character: String = "", audioRecording: URL? = nil, finalVideo: URL? = nil, date: Date = .now) {
         self.title = title
         self.background = background
         self.character = character
@@ -36,3 +26,4 @@ final class Story {
         self.date = date
     }
 }
+

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SwiftData
 struct Explore: View {
     //    @State private var showNextPage = false
     var body: some View {

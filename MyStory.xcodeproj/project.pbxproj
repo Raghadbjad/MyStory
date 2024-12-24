@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8CFBC3B52D1A1D0D00141596 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CFBC3B32D1A1D0D00141596 /* Model.xcdatamodeld */; };
+		8CFBC3B72D1A1D4C00141596 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFBC3B62D1A1D4600141596 /* Persistence.swift */; };
+		8CFBC3B92D1A9C5A00141596 /* CharacterSelectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFBC3B82D1A9C5400141596 /* CharacterSelectionModel.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8C164D7F2D0EF437009B4175 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,11 +33,27 @@
 		8C164D6E2D0EF436009B4175 /* MyStory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyStory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C164D7E2D0EF437009B4175 /* MyStoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyStoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C164D882D0EF437009B4175 /* MyStoryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyStoryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CFBC3B42D1A1D0D00141596 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		8CFBC3B62D1A1D4600141596 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		8CFBC3B82D1A9C5400141596 /* CharacterSelectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectionModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8CFBC3772D184CDE00141596 /* Exceptions for "MyStory" folder in "MyStory" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8C164D6D2D0EF436009B4175 /* MyStory */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8C164D702D0EF436009B4175 /* MyStory */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8CFBC3772D184CDE00141596 /* Exceptions for "MyStory" folder in "MyStory" target */,
+			);
 			path = MyStory;
 			sourceTree = "<group>";
 		};
@@ -75,6 +97,9 @@
 		8C164D652D0EF436009B4175 = {
 			isa = PBXGroup;
 			children = (
+				8CFBC3B82D1A9C5400141596 /* CharacterSelectionModel.swift */,
+				8CFBC3B62D1A1D4600141596 /* Persistence.swift */,
+				8CFBC3B32D1A1D0D00141596 /* Model.xcdatamodeld */,
 				8C164D702D0EF436009B4175 /* MyStory */,
 				8C164D812D0EF437009B4175 /* MyStoryTests */,
 				8C164D8B2D0EF437009B4175 /* MyStoryUITests */,
@@ -236,6 +261,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CFBC3B72D1A1D4C00141596 /* Persistence.swift in Sources */,
+				8CFBC3B52D1A1D0D00141596 /* Model.xcdatamodeld in Sources */,
+				8CFBC3B92D1A9C5A00141596 /* CharacterSelectionModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,13 +421,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyStory/MyStory.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyStory/Preview Content\"";
+				DEVELOPMENT_TEAM = 79DJ77XVNA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyStory/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "نحتاج إلى إذنك للوصول إلى مكتبة الصور";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "نحتاج إلى إذنك للوصول إلى الميكروفون.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -420,13 +453,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MyStory/MyStory.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MyStory/Preview Content\"";
+				DEVELOPMENT_TEAM = 79DJ77XVNA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyStory/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "نحتاج إلى إذنك للوصول إلى مكتبة الصور";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "نحتاج إلى إذنك للوصول إلى الميكروفون.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -550,6 +588,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8CFBC3B32D1A1D0D00141596 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8CFBC3B42D1A1D0D00141596 /* Model.xcdatamodel */,
+			);
+			currentVersion = 8CFBC3B42D1A1D0D00141596 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8C164D662D0EF436009B4175 /* Project object */;
 }

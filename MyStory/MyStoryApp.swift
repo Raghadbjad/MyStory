@@ -7,11 +7,24 @@
 
 import SwiftUI
 
+//@main
+//struct MyStoryApp: App {
+//    var body: some Scene {
+//        WindowGroup {
+//            Splash()
+//        }
+//    }
+//}
+
+import SwiftUI
+import SwiftData
+
 @main
-struct MyStoryApp: App {
+struct MyApp: App {
     var body: some Scene {
         WindowGroup {
             Splash()
         }
+        .modelContainer(for: [Story.self]) // إضافة SwiftData Container
     }
 }

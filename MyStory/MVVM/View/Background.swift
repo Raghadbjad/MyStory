@@ -6,8 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
+
+
 struct Background: View {
+    
+    @Query var Stories: [Story]
     @State private var selectedBackground = "Background" // الخلفية الافتراضية
+    @State private var selectedCharacter = "HappyBoy"
     
     var body: some View {
         NavigationStack {
@@ -29,7 +35,7 @@ struct Background: View {
                     
                     HStack(spacing: 50) {
                         // الخيار الأول
-                        NavigationLink(destination: Emotion(selectedCharacter: .constant(nil), selectedBackground: $selectedBackground)
+                        NavigationLink(destination: Emotion(selectedCharacter: $selectedCharacter, selectedBackground: $selectedBackground)
                                         .onAppear {
                                             selectedBackground = "School" // تعيين الخلفية عند التنقل
                                             print("تم اختيار الخلفية: \(selectedBackground)") // اختبار القيمة
@@ -58,7 +64,7 @@ struct Background: View {
                         }
                         
                         // الخيار الثاني
-                        NavigationLink(destination: Emotion(selectedCharacter: .constant(nil), selectedBackground: $selectedBackground)
+                        NavigationLink(destination: Emotion(selectedCharacter: $selectedCharacter, selectedBackground: $selectedBackground)
                                         .onAppear {
                                             selectedBackground = "Home" // تعيين الخلفية عند التنقل
                                             print("تم اختيار الخلفية: \(selectedBackground)") // اختبار القيمة
@@ -96,3 +102,5 @@ struct Background: View {
 #Preview {
     Background()
 }
+
+
