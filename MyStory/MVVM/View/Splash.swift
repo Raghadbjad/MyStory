@@ -31,6 +31,7 @@ struct Splash: View {
                     Text("استمع، تخيل، وعبّر... مرحبًا بك في عالم الحكايات!")
                         .font(.custom("SF Arabic", size: 40))
                         .shadow(radius: 15)
+                        .foregroundColor(.black)
                         .multilineTextAlignment(.center)
                         .fontWeight(.bold)
                         .padding()

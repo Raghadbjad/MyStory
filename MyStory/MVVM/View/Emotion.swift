@@ -11,6 +11,7 @@ import AVFoundation
 import UIKit
 import _AVKit_SwiftUI
 import SwiftData
+
 struct Emotion: View {
     @Binding var selectedCharacter: String
     @Binding var selectedBackground: String
@@ -99,7 +100,6 @@ struct Emotion: View {
 
 import SwiftUI
 import AVFoundation
-import AVKit
 
 struct CharacterPage: View {
     var character: String
@@ -116,23 +116,16 @@ struct CharacterPage: View {
 
     var body: some View {
         ZStack {
-            Image(selectedBackground) // الخلفية المختارة
+            // الخلفية المختارة
+            Image(selectedBackground)
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
 
+            // زر التسجيل في الزاوية اليمنى العليا
             VStack {
-                Spacer()
                 HStack {
-                    Image(character)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 500, height: 500)
                     Spacer()
-                }
-                .padding(.bottom, 1)
-
-                VStack {
                     Button(action: {
                         if self.isRecording {
                             self.stopRecording()
@@ -144,36 +137,52 @@ struct CharacterPage: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 80, height: 80)
-                    }
-                    .padding()
-
-                    Button(action: {
-                        if self.isPlaying {
-                            self.stopPlayback()
-                        } else {
-                            self.startPlayback()
-                        }
-                    }) {
-                        Text(isPlaying ? "Stop Playback" : "Play Recording")
-                            .font(.headline)
+                            .shadow(radius: 20)
                             .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
                     }
-
-//                    Button(action: {
-//                        self.showOverlay = true // إظهار الشاشة السوداء
-//                    }) {
-//                        Text("Show Overlay")
-//                            .font(.headline)
-//                            .padding()
-//                            .background(Color.green)
-//                            .foregroundColor(.white)
-//                            .cornerRadius(10)
-//                    }
                 }
-                .padding(.bottom, 20)
+                Spacer()
+            }
+            
+            // الكاركتر على يسار الشاشة
+            VStack {
+                Spacer()
+                HStack {
+                    Image(character)
+                        .resizable()
+                        .scaledToFit()
+                        .shadow(radius: 40)
+                        .frame(width: 500, height: 600) // حجم الكاركتر
+                        .offset(x: -20, y: 20) // محاذاة نحو الأرض
+                    Spacer()
+                }
+            }
+
+            // زر تشغيل التسجيل في أسفل يمين الشاشة
+            if !isRecording && audioURL != nil {
+                VStack {
+                    Spacer() // يجعل الزر في أسفل الشاشة
+                    HStack {
+                        Spacer() // يجعل الزر في اليمين
+                        Button(action: {
+                            if self.isPlaying {
+                                self.stopPlayback()
+                            } else {
+                                self.startPlayback()
+                            }
+                        }) {
+                            Image(systemName: isPlaying ? "stop.fill" : "play.fill") // أيقونة التشغيل/الإيقاف
+                                .font(.system(size: 150)) // حجم الأيقونة أكبر
+                                .foregroundColor(.white)
+                                .padding()
+                                .shadow(radius: 20)
+                                .background(Color.lightBlue)
+                                .clipShape(Circle())
+                        }
+                        .padding(.bottom, 20)
+                        .padding(.horizontal , 20)// إضافة مسافة من الأسفل
+                    }
+                }
             }
 
             // الشاشة السوداء الشفافة
@@ -181,23 +190,28 @@ struct CharacterPage: View {
                 Color.black.opacity(0.6)
                     .ignoresSafeArea()
                     .overlay(
-                        VStack(spacing: 20) {
-                            Button("العودة للصفحة الرئيسية") {
-                                
-                                // قم بإعادة التوجيه إلى الصفحة الرئيسية
+                        HStack(spacing: 20) {
+                            NavigationLink(destination: Main()) { // الربط مع صفحة Main
+                                Image(systemName: "house.fill") // أيقونة البيت
+                                    .font(.system(size: 50))
+                                    .foregroundColor(.white)
+                                    .shadow(radius: 20)
+                                    .padding()
+                                    .background(Color.lightBlue)
+                                    .clipShape(Circle())
                             }
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .foregroundColor(.black)
 
-                            Button("إعادة تشغيل الصفحة") {
+                            Button(action: {
                                 self.showOverlay = false // إخفاء الشاشة السوداء
+                            }) {
+                                Image(systemName: "arrow.clockwise") // أيقونة الإعادة
+                                    .font(.system(size: 50))
+                                    .shadow(radius: 20)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.lightBlue)
+                                    .clipShape(Circle())
                             }
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .foregroundColor(.black)
                         }
                         .padding()
                     )
@@ -210,7 +224,7 @@ struct CharacterPage: View {
         try? audioSession.setCategory(.playAndRecord, mode: .default)
         try? audioSession.setActive(true, options: .notifyOthersOnDeactivation)
 
-        if audioURL == nil { // إذا لم يكن هناك تسجيل سابق
+        if audioURL == nil {
             let fileName = "audio.m4a"
             let filePath = FileManager.default.temporaryDirectory.appendingPathComponent(fileName)
             audioURL = filePath
