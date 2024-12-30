@@ -3,14 +3,6 @@
 //  MyStory
 //
 //  Created by Raghad on 18/06/1446 AH.
-//
-
-import SwiftUI
-import Photos
-import AVFoundation
-import UIKit
-import _AVKit_SwiftUI
-import SwiftData
 
 struct Emotion: View {
     @Binding var selectedCharacter: String
