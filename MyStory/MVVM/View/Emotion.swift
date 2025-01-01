@@ -4,6 +4,91 @@
 //
 //  Created by Raghad on 18/06/1446 AH.
 
+//struct Emotion: View {
+//    @Binding var selectedCharacter: String
+//    @Binding var selectedBackground: String
+//
+//    var body: some View {
+//        NavigationStack {
+//            ZStack {
+//                Image("Background")
+//                    .resizable()
+//                    .scaledToFill()
+//                    .ignoresSafeArea()
+//                
+//                VStack {
+//                    Text("ماذا تشعر ؟")
+//                        .font(.custom("SF Arabic", size: 55))
+//                        .shadow(radius: 15)
+//                        .multilineTextAlignment(.center)
+//                        .fontWeight(.bold)
+//
+//                    HStack(spacing: 10) {
+//                        VStack {
+//                            NavigationLink(destination: CharacterPage(character: "HappyBoy", selectedCharacter: $selectedCharacter, selectedBackground: $selectedBackground)
+//                                            .onAppear {
+//                                                selectedCharacter = "HappyBoy" // تعيين الشخصية المختارة
+//                                                print("تم اختيار الشخصية: \(selectedCharacter)") // اختبار القيمة
+//                                            }) {
+//                                characterSelectionCard(imageName: "HappyBoy", label: "سعيد")
+//                            }
+//
+//
+//                        }
+//                        NavigationLink(destination: CharacterPage(character: "AngryBoy", selectedCharacter: $selectedCharacter, selectedBackground: $selectedBackground)
+//                                        .onAppear {
+//                                            selectedCharacter = "AngryBoy" // تعيين الشخصية المختارة
+//                                            print("تم اختيار الشخصية: \(selectedCharacter)") // اختبار القيمة
+//                                        }) {
+//                            characterSelectionCard(imageName: "AngryBoy", label: "غاضب")
+//                        }
+//
+//                        NavigationLink(destination: CharacterPage(character: "SurprisedBoy", selectedCharacter: $selectedCharacter, selectedBackground: $selectedBackground)
+//                                        .onAppear {
+//                                            selectedCharacter = "SurprisedBoy" // تعيين الشخصية المختارة
+//                                            print("تم اختيار الشخصية: \(selectedCharacter)") // اختبار القيمة
+//                                        }) {
+//                            characterSelectionCard(imageName: "SurprisedBoy", label: "متفاجئ")
+//                        }
+//
+//                        NavigationLink(destination: CharacterPage(character: "SadBoy", selectedCharacter: $selectedCharacter, selectedBackground: $selectedBackground)
+//                                        .onAppear {
+//                                            selectedCharacter = "SadBoy" // تعيين الشخصية المختارة
+//                                            print("تم اختيار الشخصية: \(selectedCharacter)") // اختبار القيمة
+//                                        }) {
+//                            characterSelectionCard(imageName: "SadBoy", label: "حزين")
+//                        }
+//                    }
+//                    .padding()
+//                }
+//            }
+//        }
+//    }
+//
+//    func characterSelectionCard(imageName: String, label: String) -> some View {
+//        ZStack {
+//            RoundedRectangle(cornerRadius: 15)
+//                .fill(Color.white)
+//                .frame(width: 300, height: 400)
+//                .shadow(radius: 5)
+//                .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1))
+//            VStack {
+//                Image(imageName)
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: 300, height: 300)
+//                Text(label)
+//                    .font(.custom("SF Arabic", size: 40))
+//                    .shadow(radius: 15)
+//                    .multilineTextAlignment(.center)
+//                    .fontWeight(.bold)
+//                    .foregroundColor(.black)
+//                    .padding(.top, 5)
+//            }
+//        }
+//    }
+//}
+
 struct Emotion: View {
     @Binding var selectedCharacter: String
     @Binding var selectedBackground: String
@@ -24,39 +109,18 @@ struct Emotion: View {
                         .fontWeight(.bold)
 
                     HStack(spacing: 10) {
-                        VStack {
-                            NavigationLink(destination: CharacterPage(character: "HappyBoy", selectedCharacter: $selectedCharacter, selectedBackground: $selectedBackground)
-                                            .onAppear {
-                                                selectedCharacter = "HappyBoy" // تعيين الشخصية المختارة
-                                                print("تم اختيار الشخصية: \(selectedCharacter)") // اختبار القيمة
-                                            }) {
-                                characterSelectionCard(imageName: "HappyBoy", label: "سعيد")
-                            }
-
-
-                        }
-                        NavigationLink(destination: CharacterPage(character: "AngryBoy", selectedCharacter: $selectedCharacter, selectedBackground: $selectedBackground)
-                                        .onAppear {
-                                            selectedCharacter = "AngryBoy" // تعيين الشخصية المختارة
-                                            print("تم اختيار الشخصية: \(selectedCharacter)") // اختبار القيمة
-                                        }) {
-                            characterSelectionCard(imageName: "AngryBoy", label: "غاضب")
-                        }
-
-                        NavigationLink(destination: CharacterPage(character: "SurprisedBoy", selectedCharacter: $selectedCharacter, selectedBackground: $selectedBackground)
-                                        .onAppear {
-                                            selectedCharacter = "SurprisedBoy" // تعيين الشخصية المختارة
-                                            print("تم اختيار الشخصية: \(selectedCharacter)") // اختبار القيمة
-                                        }) {
-                            characterSelectionCard(imageName: "SurprisedBoy", label: "متفاجئ")
-                        }
-
-                        NavigationLink(destination: CharacterPage(character: "SadBoy", selectedCharacter: $selectedCharacter, selectedBackground: $selectedBackground)
-                                        .onAppear {
-                                            selectedCharacter = "SadBoy" // تعيين الشخصية المختارة
-                                            print("تم اختيار الشخصية: \(selectedCharacter)") // اختبار القيمة
-                                        }) {
-                            characterSelectionCard(imageName: "SadBoy", label: "حزين")
+                        if selectedCharacter.contains("BoyCharcter") {
+                            // إذا تم اختيار شخصية "ولد"، عرض صور الولد
+                            characterEmotionSelection(imagePrefix: "HappyBoy", label: "سعيد")
+                            characterEmotionSelection(imagePrefix: "AngryBoy", label: "غاضب")
+                            characterEmotionSelection(imagePrefix: "SurprisedBoy", label: "متفاجئ")
+                            characterEmotionSelection(imagePrefix: "SadBoy", label: "حزين")
+                        } else {
+                            // إذا تم اختيار شخصية "بنت"، عرض صور البنت
+                            characterEmotionSelection(imagePrefix: "HappyGirl", label: "سعيدة")
+                            characterEmotionSelection(imagePrefix: "AngryGirl", label: "غاضبة")
+                            characterEmotionSelection(imagePrefix: "SuprisedGirl", label: "متفاجأة")
+                            characterEmotionSelection(imagePrefix: "SadGirl", label: "حزينة")
                         }
                     }
                     .padding()
@@ -65,25 +129,32 @@ struct Emotion: View {
         }
     }
 
-    func characterSelectionCard(imageName: String, label: String) -> some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 15)
-                .fill(Color.white)
-                .frame(width: 300, height: 400)
-                .shadow(radius: 5)
-                .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1))
-            VStack {
-                Image(imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 300, height: 300)
-                Text(label)
-                    .font(.custom("SF Arabic", size: 40))
-                    .shadow(radius: 15)
-                    .multilineTextAlignment(.center)
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .padding(.top, 5)
+    // دالة لاختيار شخصية تعبيرية بناءً على الصورة
+    func characterEmotionSelection(imagePrefix: String, label: String) -> some View {
+        NavigationLink(destination: CharacterPage(character: imagePrefix, selectedCharacter: $selectedCharacter, selectedBackground: $selectedBackground)
+                        .onAppear {
+                            selectedCharacter = imagePrefix // تعيين الشخصية المختارة
+                            print("تم اختيار الشخصية: \(selectedCharacter)") // اختبار القيمة
+                        }) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 15)
+                    .fill(Color.white)
+                    .frame(width: 300, height: 400)
+                    .shadow(radius: 5)
+                    .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.black, lineWidth: 1))
+                VStack {
+                    Image(imagePrefix)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300, height: 300)
+                    Text(label)
+                        .font(.custom("SF Arabic", size: 40))
+                        .shadow(radius: 15)
+                        .multilineTextAlignment(.center)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                        .padding(.top, 5)
+                }
             }
         }
     }
