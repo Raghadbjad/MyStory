@@ -49,7 +49,7 @@ struct Main: View {
                             }
                         }
                         VStack {
-                            NavigationLink(destination: Explore()) {
+                            NavigationLink(destination: MainContentView()) {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 15)
                                         .fill(Color.white)

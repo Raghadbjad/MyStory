@@ -38,9 +38,22 @@
 		8CFBC3B82D1A9C5400141596 /* CharacterSelectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectionModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8CFBC56E2D22D73500141596 /* Exceptions for "MyStory" folder in "MyStory" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8C164D6D2D0EF436009B4175 /* MyStory */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8C164D702D0EF436009B4175 /* MyStory */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8CFBC56E2D22D73500141596 /* Exceptions for "MyStory" folder in "MyStory" target */,
+			);
 			path = MyStory;
 			sourceTree = "<group>";
 		};
