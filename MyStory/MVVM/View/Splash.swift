@@ -11,7 +11,7 @@ struct Splash: View {
     @State private var showNextPage = false
     var body: some View {
         if showNextPage {
-        Charcter()
+            Main()
         } else {
             
             ZStack {

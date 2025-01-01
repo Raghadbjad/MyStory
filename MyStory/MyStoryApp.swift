@@ -23,6 +23,7 @@ import SwiftData
 struct MyApp: App {
     var body: some Scene {
         WindowGroup {
+//            LogInPage()
             Splash()
         }
         .modelContainer(for: [Story.self]) // إضافة SwiftData Container
