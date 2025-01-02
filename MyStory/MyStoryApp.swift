@@ -24,8 +24,13 @@ struct MyApp: App {
     var body: some Scene {
         WindowGroup {
 //            LogInPage()
-            Splash()
+//            Splash()
+//            LogUpPage()
+            
+            LogInPage()
+            
         }
-        .modelContainer(for: [Story.self]) // إضافة SwiftData Container
+//        .modelContainer(for: [Story.self]) // إضافة SwiftData Container
+        .modelContainer(for: User.self) 
     }
 }

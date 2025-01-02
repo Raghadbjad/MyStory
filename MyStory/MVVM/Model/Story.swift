@@ -27,15 +27,16 @@ import SwiftData
 //    }
 //}
 
+import Foundation
 import SwiftData
 
 @Model
-class Story {
-    var email: String
+class User {
+    var userName: String
     var password: String
     
-    init(email: String, password: String) {
-        self.email = email
+    init(userName: String, password: String) {
+        self.userName = userName
         self.password = password
     }
 }

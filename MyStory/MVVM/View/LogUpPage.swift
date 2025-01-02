@@ -1,23 +1,22 @@
 //
-//  LogInPage.swift
+//  LogUpPage.swift
 //  MyStory
 //
 //  Created by Raghad on 02/07/1446 AH.
-//
 //
 
 
 import SwiftUI
 import SwiftData
 
-struct LogInPage: View {
+struct LogUpPage: View {
     @Environment(\.modelContext) private var context
-    @Query private var users: [User]  // استرجاع جميع المستخدمين المحفوظين
     @State private var userName = ""
     @State private var password = ""
-    @State private var isAuthenticated = false
+    @State private var confirmPassword = ""
+    @State private var isSignedUp = false
     @State private var errorMessage = ""
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -35,7 +34,7 @@ struct LogInPage: View {
                         .padding(.bottom, 30)
                     
                     // العنوان
-                    Text("تسجيل الدخول")
+                    Text("إنشاء حساب")
                         .font(.title2)
                         .fontWeight(.semibold)
                         .foregroundColor(.black)
@@ -44,7 +43,7 @@ struct LogInPage: View {
                     // حقول الإدخال
                     VStack(spacing: 15) {
                         TextField("اسم المستخدم", text: $userName)
-                            .multilineTextAlignment(.center) // يجعل النص في المنتصف
+                            .multilineTextAlignment(.center)
                             .padding()
                             .frame(width: 400, height: 45)
                             .background(Color.white)
@@ -53,7 +52,15 @@ struct LogInPage: View {
                             .autocapitalization(.none)
                         
                         SecureField("كلمة المرور", text: $password)
-                            .multilineTextAlignment(.center) // يجعل النص في المنتصف
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .frame(width: 400, height: 45)
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 2)
+                        
+                        SecureField("تأكيد كلمة المرور", text: $confirmPassword)
+                            .multilineTextAlignment(.center)
                             .padding()
                             .frame(width: 400, height: 45)
                             .background(Color.white)
@@ -69,45 +76,52 @@ struct LogInPage: View {
                             .padding(.top, 5)
                     }
                     
-                    // زر تسجيل الدخول
+                    // زر إنشاء الحساب
                     Button(action: {
-                        authenticateUser(userName: userName, password: password)
+                        signUpUser(userName: userName, password: password, confirmPassword: confirmPassword)
                     }) {
-                        Text("تسجيل الدخول")
+                        Text("إنشاء حساب")
                             .frame(width: 400, height: 45)
-                            .background(Color("LightBlue")) // لون الزر بيبي بلو
-                            .foregroundColor(.black)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
                             .cornerRadius(10)
                             .shadow(radius: 2)
                     }
                     .padding(.top, 20)
                     
-                    // رابط إنشاء حساب جديد
-                    NavigationLink(destination: LogUpPage(), label: {
-                        Text("إنشاء حساب جديد")
-                            .bold()
-                            .font(.footnote)
-                            .foregroundColor(.blue)
-                            .padding(.top, 10)
-                    })
-                    
-                    // التنقل في حالة نجاح تسجيل الدخول
-                    if isAuthenticated {
-                        NavigationLink(destination: Splash(), isActive: $isAuthenticated) {
-                            EmptyView()
-                        }
+                    // التنقل في حالة نجاح تسجيل الحساب
+                    NavigationLink(destination: Splash(), isActive: $isSignedUp) {
+                        EmptyView()
                     }
                 }
                 .padding()
             }
         }
     }
-
-    private func authenticateUser(userName: String, password: String) {
-        if let user = users.first(where: { $0.userName == userName && $0.password == password }) {
-            isAuthenticated = true
+    
+    private func signUpUser(userName: String, password: String, confirmPassword: String) {
+        if userName.isEmpty || password.isEmpty || confirmPassword.isEmpty {
+            errorMessage = "جميع الحقول مطلوبة."
+        } else if password != confirmPassword {
+            errorMessage = "كلمات المرور غير متطابقة."
+        } else if password.count < 8 {
+            errorMessage = "كلمة المرور يجب أن تكون على الأقل 8 أحرف."
+        } else if !isValidPassword(password) {
+            errorMessage = "كلمة المرور يجب أن تحتوي على أحرف كبيرة، أحرف صغيرة، وأرقام."
         } else {
-            errorMessage = "اسم المستخدم أو كلمة المرور غير صحيحة."
+            let newUser = User(userName: userName, password: password)
+            context.insert(newUser)
+            // تأكد من التحديث على UI بعد إضافة المستخدم
+            DispatchQueue.main.async {
+                isSignedUp = true
+            }
         }
+    }
+    
+    // تحقق من قوة كلمة المرور (حروف كبيرة، حروف صغيرة، أرقام)
+    private func isValidPassword(_ password: String) -> Bool {
+        let passwordRegex = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}"
+        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        return passwordPredicate.evaluate(with: password)
     }
 }

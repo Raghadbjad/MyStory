@@ -185,9 +185,9 @@ struct Background: View {
     }
 }
 
-//#Preview {
-//    Background(selectedCharacter: .constant("Boy"))
-//}
+#Preview {
+    Background(selectedCharacter: .constant("Boy"))
+}
 
 //#Preview {
 //    Background()
